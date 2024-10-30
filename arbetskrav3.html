@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betygskalkulator</title>
+</head>
+<body>
+    <h1>Betygskalkulator</h1>
+
+    <section>
+        <h2>Information om uppgifterna och dess viktighet för betyget</h2>
+        <ul>
+            <li>
+                <h3>Uppgift 1</h3>
+                <p>Max antal poäng: 10 poäng</p>
+                <p>Viktighet: räknas 30% av betyget</p>
+            </li>
+            <li>
+                <h3>Uppgift 2</h3>
+                <p>Max antal poäng: 12 poäng</p>
+                <p>Viktighet: räknas 70% av betyget</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="assignment">
+        <p>Uppgift 1: <input id="uppgift1" type="number"></p>
+        <p>Uppgift 2: <input id="uppgift2" type="number"></p>
+        <button onclick="calculate()">Räkna ut betyg</button>
+    </section>
+
+    <section id="result">
+        <h3>Resultat:</h3>
+        <p id="result-calculated"></p>
+    </section>
+
+    <script>
+        //Totalt vikt
+        let total = 0
+        //Betygsskala
+        const grades = [
+            {grade: "F", treshold: 0},
+            {grade: "E", treshold: 25},
+            {grade: "D", treshold: 44},
+            {grade: "C", treshold: 68},
+            {grade: "B", treshold: 88},
+            {grade: "A", treshold: 100}
+        ]
+
+        function calculate() {
+            const uppgift1 = document.getElementById("uppgift1").value
+            const uppgift2 = document.getElementById("uppgift2").value
+
+            // Kontrollera att poängen är giltiga nummer (hjälp av chatgpt)
+            if (isNaN(uppgift1) || isNaN(uppgift2)) {
+            document.getElementById('result-calculated').textContent = "Ange giltiga poäng för båda uppgifterna.";
+            return;
+            }
+        }
+    </script>
+</body>
+</html>
