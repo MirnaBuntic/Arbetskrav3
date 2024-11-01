@@ -4,29 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Betygskalkulator</title>
+    <style>
+        body{
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #information{
+            margin-bottom: 2rem;
+        }
+
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+        
+        #assignment{
+            display: flex;
+            flex-direction: column;
+            background-color: aliceblue;
+            padding: 2rem;
+        }
+
+        #assignment p{
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        button{
+            padding: 1rem;
+            margin-right: 10rem;
+            margin-left: 10rem;
+            font-size: large;
+        }
+
+        #result{
+            font-size: x-large;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Betygskalkulator</h1>
 
-    <section>
+    <section id="information">
         <h2>Information om uppgifterna och dess viktighet för betyget</h2>
         <ul>
             <li>
                 <h3>Uppgift 1</h3>
                 <p>Max antal poäng: 10 poäng</p>
-                <p>Viktighet: räknas 30% av betyget</p>
+                <p>Viktighet: 30% av betyget</p>
             </li>
             <li>
                 <h3>Uppgift 2</h3>
                 <p>Max antal poäng: 12 poäng</p>
-                <p>Viktighet: räknas 70% av betyget</p>
+                <p>Viktighet: 70% av betyget</p>
             </li>
         </ul>
     </section>
 
     <section id="assignment">
-        <p>Uppgift 1: <input id="uppgift1" type="number"></p>
-        <p>Uppgift 2: <input id="uppgift2" type="number"></p>
+        <h3>Vänligen fyll i vilka poäng du fick på uppgift 1 och uppgift 2</h3>
+        <p>Uppgift 1: <input id="uppgift1" type="number" min="0" max="10"> av 10 poäng</p>
+        <p>Uppgift 2: <input id="uppgift2" type="number" min="0" max="12"> av 12 poäng</p>
         <button onclick="calculate()">Räkna ut betyg</button>
     </section>
 
@@ -48,7 +91,7 @@
 
          //Kontrollera att användaren lägger in giltiga tal
          if((uppgift1 > 10 || uppgift1 < 0) || (uppgift2 > 12 || uppgift2 < 0)){
-            document.getElementById("result-calculated").innerHTML = "Skriv in giltiga tal i fälten ovan...";
+            document.getElementById("result-calculated").innerHTML = "Skriv in giltiga tal i båda fälten ovan...";
             return;
          }
          
