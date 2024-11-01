@@ -36,27 +36,45 @@
     </section>
 
     <script>
-        //Totalt vikt
-        let total = 0
-        //Betygsskala
-        const grades = [
-            {grade: "F", treshold: 0},
-            {grade: "E", treshold: 25},
-            {grade: "D", treshold: 44},
-            {grade: "C", treshold: 68},
-            {grade: "B", treshold: 88},
-            {grade: "A", treshold: 100}
-        ]
+        function calculate () {
+            const uppgift1 = document.getElementById("uppgift1").value;
+            const uppgift2 = document.getElementById("uppgift2").value;
 
-        function calculate() {
-            const uppgift1 = document.getElementById("uppgift1").value
-            const uppgift2 = document.getElementById("uppgift2").value
-
-            // Kontrollera att poängen är giltiga nummer (hjälp av chatgpt)
-            if (isNaN(uppgift1) || isNaN(uppgift2)) {
-            document.getElementById('result-calculated').textContent = "Ange giltiga poäng för båda uppgifterna.";
+         // Kontrollera att användaren har fyllt i båda värdena
+         if (uppgift1 === "" || uppgift2 === "") {
+            document.getElementById("result-calculated").innerHTML = "Fyll i båda fälten ovan...";
             return;
+         }
+
+         //Kontrollera att användaren lägger in giltiga tal
+         if((uppgift1 > 10 || uppgift1 < 0) || (uppgift2 > 12 || uppgift2 < 0)){
+            document.getElementById("result-calculated").innerHTML = "Skriv in giltiga tal i fälten ovan...";
+            return;
+         }
+         
+         //Uträkning
+         const totalPercent = (0.3 * (uppgift1 / 10 * 100)) + (0.7 * (uppgift2 / 12 * 100));
+
+         //Betygskala
+         const grades = [
+            {grade: "F", threshold: 0},
+            {grade: "E", threshold: 25},
+            {grade: "D", threshold: 44},
+            {grade: "C", threshold: 68},
+            {grade: "B", threshold: 88},
+            {grade: "A", threshold: 100}
+         ]
+
+         // Bestäm betyg baserat på totalPercent
+         let grade = "F"; // Standardbetyg
+            for (const currentGrade of grades) {
+                if (totalPercent >= currentGrade.threshold) {
+                    grade = currentGrade.grade;
+                }
             }
+
+         document.getElementById("result-calculated").innerHTML = `Ditt betyg är: ${grade}`;
+
         }
     </script>
 </body>
