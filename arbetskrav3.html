@@ -79,11 +79,12 @@
     </section>
 
     <script>
+        //Skapa en funktion med uppgifterna
         function calculate () {
             const uppgift1 = document.getElementById("uppgift1").value;
             const uppgift2 = document.getElementById("uppgift2").value;
 
-         // Kontrollera att användaren har fyllt i båda värdena
+         //Kontrollera att användaren har fyllt i båda fälten
          if (uppgift1 === "" || uppgift2 === "") {
             document.getElementById("result-calculated").innerHTML = "Fyll i båda fälten ovan...";
             return;
@@ -95,7 +96,7 @@
             return;
          }
          
-         //Uträkning
+         //Formeln för att räkna ut betyg
          const totalPercent = (0.3 * (uppgift1 / 10 * 100)) + (0.7 * (uppgift2 / 12 * 100));
 
          //Betygskala
@@ -108,7 +109,7 @@
             {grade: "A", threshold: 100}
          ]
 
-         // Bestäm betyg baserat på totalPercent
+         // Bestäm betyg baserat på totalPercent. Loop för att hitta betyg baserat på poängen.
          let grade = "F"; // Standardbetyg
             for (const currentGrade of grades) {
                 if (totalPercent >= currentGrade.threshold) {
