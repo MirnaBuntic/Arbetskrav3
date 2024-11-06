@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betygskalkulator</title>
+    <style>
+        body{
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #information{
+            margin-bottom: 2rem;
+        }
+
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+        
+        #assignment{
+            display: flex;
+            flex-direction: column;
+            background-color: aliceblue;
+            padding: 2rem;
+        }
+
+        #assignment p{
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        button{
+            padding: 1rem;
+            margin-right: 10rem;
+            margin-left: 10rem;
+            font-size: large;
+        }
+
+        #result{
+            font-size: x-large;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Betygskalkulator</h1>
+
+    <section id="information">
+        <h2>Information om uppgifterna och dess viktighet för betyget</h2>
+        <ul>
+            <li>
+                <h3>Uppgift 1</h3>
+                <p>Max antal poäng: 10 poäng</p>
+                <p>Viktighet: 30% av betyget</p>
+            </li>
+            <li>
+                <h3>Uppgift 2</h3>
+                <p>Max antal poäng: 12 poäng</p>
+                <p>Viktighet: 70% av betyget</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="assignment">
+        <h3>Vänligen fyll i vilka poäng du fick på uppgift 1 och uppgift 2</h3>
+        <p>Uppgift 1: <input id="uppgift1" type="number" min="0" max="10"> av 10 poäng</p>
+        <p>Uppgift 2: <input id="uppgift2" type="number" min="0" max="12"> av 12 poäng</p>
+        <button onclick="calculate()">Räkna ut betyg</button>
+    </section>
+
+    <section id="result">
+        <h3>Resultat:</h3>
+        <p id="result-calculated"></p>
+    </section>
+
+    <script>
+        //Skapa en funktion med uppgifterna
+        function calculate () {
+            const uppgift1 = document.getElementById("uppgift1").value;
+            const uppgift2 = document.getElementById("uppgift2").value;
+
+         //Kontrollera att användaren har fyllt i båda fälten
+         if (uppgift1 === "" || uppgift2 === "") {
+            document.getElementById("result-calculated").innerHTML = "Fyll i båda fälten ovan...";
+            return;
+         }
+
+         //Kontrollera att användaren lägger in giltiga tal
+         if((uppgift1 > 10 || uppgift1 < 0) || (uppgift2 > 12 || uppgift2 < 0)){
+            document.getElementById("result-calculated").innerHTML = "Skriv in giltiga tal i båda fälten ovan...";
+            return;
+         }
+         
+         //Formeln för att räkna ut betyg
+         const totalPercent = (0.3 * (uppgift1 / 10 * 100)) + (0.7 * (uppgift2 / 12 * 100));
+
+         //Betygskala
+         const grades = [
+            {grade: "F", threshold: 0},
+            {grade: "E", threshold: 25},
+            {grade: "D", threshold: 44},
+            {grade: "C", threshold: 68},
+            {grade: "B", threshold: 88},
+            {grade: "A", threshold: 100}
+         ]
+
+         // Bestäm betyg baserat på totalPercent. Loop för att hitta betyg baserat på poängen.
+         let grade = "F"; // Standardbetyg
+            for (const currentGrade of grades) {
+                if (totalPercent >= currentGrade.threshold) {
+                    grade = currentGrade.grade;
+                }
+            }
+
+         document.getElementById("result-calculated").innerHTML = `Ditt betyg är: ${grade}`;
+
+        }
+    </script>
+</body>
+</html>
